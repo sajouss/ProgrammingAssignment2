@@ -1,7 +1,6 @@
-## Put comments here that give an overall description of what your
-## functions do
-
-## Write a short comment describing this function
+## Given a Matrix this function will store it
+## it will also store the solve() value of the matrix
+## for later retrieval
 
 makeCacheMatrix <- function(x = matrix()) {
   s <- NULL
@@ -14,6 +13,9 @@ makeCacheMatrix <- function(x = matrix()) {
   setSolve <- function(solve) s <<- solve
   getSolve <- function() s
   
+  ##return the list of operations that can be performed on the 
+  ##chached value
+  
   list(set = set, get = get, 
        setSolve = setSolve, 
        getSolve = getSolve)
@@ -21,13 +23,15 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Returns the inverse of a given matrix using solve()
-## if solve already exists it returns it, otherwise it calculates
+## Returns the compputed inverse of a given square matrix using solve()
+## If the solve value already exists it returns it, otherwise it calculates
 ## and stores it in the cache.
 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
   s <- x$getSolve()
+  
+  ##Found cached value, so we will not recalculate it
   if(!is.null(s)) {
     message("getting cached data")
     return(s)
